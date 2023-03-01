@@ -8,6 +8,17 @@ import unittest
 from TestRunner import HTMLTestRunner
 from TestRunner import SMTP
 from test import TestDemo, TestDemo2
+from flask import Flask,render_template, request, url_for, redirect, session
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    # return "<p>Hello, World!</p>"
+    return render_template('index.html')
+
+# if __name__ == "__main__":
+#   app.run(debug=True, host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     suit = unittest.TestSuite()
@@ -26,7 +37,7 @@ if __name__ == '__main__':
             description='unit test'
         )
         runner.run(suit)
-
+    app.run(debug=True, host='0.0.0.0', port=5000)
     # use gmail to provide email sending service
     # smtp = SMTP(user="sender@gmail.com", password="", host="smtp.gmail.com")
     # fill in the receiver email here
